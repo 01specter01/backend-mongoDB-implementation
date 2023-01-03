@@ -36,29 +36,6 @@ server.use(logMiddleware);
 server.use("/api/albums", albumRouter);
 server.use("/api/photos", photoRouter);
 
-import { MongoClient, ServerApiVersion } from "./lib/mongodb.js";
-
-const uri = process.env.MONGODB_URI;
-
-const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverApi: ServerApiVersion.v1,
-});
-
-client.connect(async (err) => {
-    const db = client.db("journal");
-    const reportsCollection = db.collection("reports");
-    const reports = await reportsCollection.find().toArray();
-    console.log(reports);
-
-    console.log(
-        await client.db("journal").collection("reports").find().toArrray()
-    );
-
-    client.close();
-});
-
 server.use((req, res, next) => {
     console.log(req.method, req.url);
     next();
