@@ -67,7 +67,3 @@ server.use((err, req, res, next) => {
     console.log("Ein Fehler ist aufgetreten", err);
     res.status(500).send("Es liegt nicht an dir sondern an mir...");
 });
-
-server.listen(port, () => {
-    console.log("Server is running on " + port);
-});
