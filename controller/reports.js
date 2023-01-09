@@ -1,7 +1,9 @@
 import db from "../lib/mongodb.js";
 import { ObjectId } from "mongodb";
+import { response } from "express";
 
 const collection = db.collection("photos");
+import mongoose from "mongoose";
 
 export const getAll = async (req, res) => {
     const reports = await collection.find().toArray();
@@ -9,7 +11,10 @@ export const getAll = async (req, res) => {
 };
 
 export const getOne = async (req, res) => {
+    const isValid = mongoose.Types.ObjectId.isValid(req.params.id);
+    if (!isValid) return res.json("invalide id");
     const report = await collection.findOne({ _id: ObjectId(req.params.id) });
+
     res.json(report);
 };
 
