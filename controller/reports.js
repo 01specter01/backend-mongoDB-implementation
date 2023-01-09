@@ -1,7 +1,7 @@
 import db from "../lib/mongodb.js";
 import { ObjectId } from "mongodb";
 
-const collection = db.collection("reports");
+const collection = db.collection("photos");
 
 export const getAll = async (req, res) => {
     const reports = await collection.find().toArray();
