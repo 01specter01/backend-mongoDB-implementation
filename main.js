@@ -12,9 +12,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-import albumRouter from "./routes/albumRouter.js";
-import photoRouter from "./routes/photoRouter.js";
+import reports from "../routes/reports.js";
 
 const server = express();
 // Anstatt den Port im Code festzulegen, greifen wir auf die Umgebungsvariable PORT zu.
@@ -33,8 +31,8 @@ server.use(express.json());
 import logMiddleware from "./middlewares/log.js";
 server.use(logMiddleware);
 
-server.use("/api/albums", albumRouter);
-server.use("/api/photos", photoRouter);
+server.use("/journal", reports);
+
 
 server.use((req, res, next) => {
     console.log(req.method, req.url);
