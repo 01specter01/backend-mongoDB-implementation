@@ -12,7 +12,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-import reports from "../routes/reports.js";
+import reportsRouter from "./routes/reports.js";
 
 const server = express();
 // Anstatt den Port im Code festzulegen, greifen wir auf die Umgebungsvariable PORT zu.
@@ -31,7 +31,7 @@ server.use(express.json());
 import logMiddleware from "./middlewares/log.js";
 server.use(logMiddleware);
 
-server.use("/journal", reports);
+server.use("/journal", reportsRouter);
 
 
 server.use((req, res, next) => {
